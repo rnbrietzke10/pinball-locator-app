@@ -3,9 +3,8 @@ import { useJsApiLoader, GoogleMap } from '@react-google-maps/api';
 
 import './Map.css';
 
-const Map = () => {
+const Map = ({ location }) => {
   const [map, setMap] = useState(null);
-  const [location, setLocation] = useState({ lat: 48.8584, lng: 2.2945 });
   // Loads sciprt from the cdn
   const { isLoaded } = useJsApiLoader({
     // googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
