@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './App.css';
 import GetLocationBtn from './components/GetLocationBtn/GetLocationBtn';
 import Map from './components/Map/Map';
