@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import 'src/App.css';
-import GetLocationBtn from 'src/components/GetLocationBtn/GetLocationBtn';
-import Map from 'src/components/Map/Map';
-import SearchForm from 'src/components/SearchForm/SearchForm';
+import './App.css';
+import GetLocationBtn from './components/GetLocationBtn/GetLocationBtn';
+import Map from './components/Map/Map';
+import SearchForm from './components/SearchForm/SearchForm';
 
 function App() {
   // const BASE_URL = 'https://pinballmap.com/api/v1';
@@ -13,20 +13,20 @@ function App() {
   const getLocation = locationObj => {
     // Use locationObj, {lat, lng}
     setLocation(locationObj);
-  };
-  useEffect(() => {
-    async function getPinballData() {
-      const res = await axios.get(`/regions/closest_by_lat_lon.json`, {
-        params: { lat: location.lat, lon: location.lng },
-      });
-      const regionLocationsData = await axios.get(
-        `/region/${res.data.region.name}/locations.json`
-      );
-      console.log(regionLocationsData.data);
-      // setPinBallData();
-    }
     getPinballData();
-  }, [location]);
+  };
+
+  async function getPinballData() {
+    setPinBallData([]);
+    const res = await axios.get(`/regions/closest_by_lat_lon.json`, {
+      params: { lat: location.lat, lon: location.lng },
+    });
+    const regionLocationsData = await axios.get(
+      `/region/${res.data.region.name}/locations.json`
+    );
+    console.log(regionLocationsData.data);
+    setPinBallData(regionLocationsData.data);
+  }
 
   return (
     <div className='App-container'>
@@ -37,7 +37,7 @@ function App() {
           <GetLocationBtn getLocation={getLocation} />
         </div>
       </header>
-      <Map location={location} />
+      <Map location={location} pinballData={pinballData} />
     </div>
   );
 }

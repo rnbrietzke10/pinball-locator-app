@@ -31,3 +31,10 @@
   padding: 10px;
   cursor: pointer;
 }
+
+.icon8 {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  color: #fff;
+}

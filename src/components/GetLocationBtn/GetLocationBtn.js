@@ -1,6 +1,6 @@
 import React from 'react';
 
-import myLocationIcon from 'src/assets/icons8-location-49.png';
+import myLocationIcon from '../../assets/icons8-location-49.png';
 
 const GetLocationBtn = ({ getLocation }) => {
   // Use Google API to ge users longitude and latitude.

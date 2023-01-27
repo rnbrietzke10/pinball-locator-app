@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import 'src/components/SearchForm/SearchForm.css';
+import './SearchForm.css';
 
 const SearchForm = ({ getLocation }) => {
   const INITIAL_STATE = { lat: '', lng: '' };
