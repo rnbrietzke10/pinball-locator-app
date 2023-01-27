@@ -5,9 +5,9 @@ import myLocationIcon from '../../assets/icons8-location-49.png';
 const GetLocationBtn = ({ getLocation }) => {
   // Use Google API to ge users longitude and latitude.
 
-  const getPosition = () => {
+  const getPosition = async () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, posError); // Passing in a success callback and an error callback fn
+      await navigator.geolocation.getCurrentPosition(showPosition, posError); // Passing in a success callback and an error callback fn
     } else {
       alert('Sorry, Geolocation is not supported by this browser.'); // Alert is browser does not support geolocation
     }

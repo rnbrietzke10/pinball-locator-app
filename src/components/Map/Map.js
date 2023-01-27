@@ -1,18 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api';
+import axios from 'axios';
 import myLocation from '../../assets/icons8-location-49.png';
 import markerIcon from '../../assets/icons8-map-pin-40.png';
 import './Map.css';
 
-const Map = ({ location, pinballData }) => {
+const Map = ({ location }) => {
   console.log('LOCATION: ', location);
-  console.log('Pinball data', pinballData.locations);
-  const [map, setMap] = useState(null);
 
+  const [map, setMap] = useState(null);
+  const [pinballData, setPinBallData] = useState([]);
   // Loads sciprt from the cdn
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
+  useEffect(() => {
+    const getPinballData = async () => {
+      setPinBallData([]);
+      const res = await axios.get(`/regions/closest_by_lat_lon.json`, {
+        params: { lat: location.lat, lon: location.lng },
+      });
+      const regionLocationsData = await axios.get(
+        `/region/${res.data.region.name}/locations.json`
+      );
+      console.log(regionLocationsData.data);
+      setPinBallData(regionLocationsData.data);
+    };
+    getPinballData();
+  }, [location]);
 
   if (!isLoaded) {
     // Create loader
@@ -48,6 +63,7 @@ const Map = ({ location, pinballData }) => {
               );
             })
           : ''}
+        <Marker icon={myLocation} position={location} />
       </GoogleMap>
     </main>
   );
