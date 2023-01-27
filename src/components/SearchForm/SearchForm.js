@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './SearchForm.css';
+import 'src/components/SearchForm/SearchForm.css';
 
 const SearchForm = ({ getLocation }) => {
   const INITIAL_STATE = { lat: '', lng: '' };
@@ -8,12 +8,13 @@ const SearchForm = ({ getLocation }) => {
   // Getvalues from inputs
   const handleSubmit = e => {
     e.preventDefault();
-    getLocation(formData);
+    const { lat, lng } = formData;
+    getLocation({ lat: parseFloat(lat), lng: parseFloat(lng) });
     setFormData(INITIAL_STATE);
   };
   const handleChange = e => {
     const { name, value } = e.target;
-    setFormData(data => ({ ...data, [name]: parseFloat(value) }));
+    setFormData(data => ({ ...data, [name]: value }));
   };
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import myLocationIcon from '../assets/icons8-location-49.png';
+import myLocationIcon from 'src/assets/icons8-location-49.png';
 
 const GetLocationBtn = ({ getLocation }) => {
   // Use Google API to ge users longitude and latitude.
@@ -13,15 +13,14 @@ const GetLocationBtn = ({ getLocation }) => {
     }
   };
   // Geolocation error callback fn. Query permissions to check if the error occured due to user not allowing location to be shared
-  const posError = () => {
+  const posError = async () => {
     if (navigator.permissions) {
-      navigator.permissions.query({ name: 'geolocation' }).then(res => {
-        if (res.state === 'denied') {
-          alert(
-            'Enable location permissions for this website in your browser settings.'
-          );
-        }
-      });
+      const res = await navigator.permissions.query({ name: 'geolocation' });
+      if (res.state === 'denied') {
+        alert(
+          'Enable location permissions for this website in your browser settings.'
+        );
+      }
     } else {
       alert(
         'Unable to access your location. You can continue by submitting location manually.'
@@ -36,7 +35,7 @@ const GetLocationBtn = ({ getLocation }) => {
   };
   return (
     <button className='btn' onClick={getPosition}>
-      Use My location
+      Near Me{' '}
       <img
         style={{ height: '15px' }}
         src={myLocationIcon}

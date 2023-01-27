@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useJsApiLoader, GoogleMap } from '@react-google-maps/api';
 
-import './Map.css';
+import 'src/components/Map/Map.css';
 
 const Map = ({ location }) => {
   const [map, setMap] = useState(null);
   // Loads sciprt from the cdn
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    // googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
   if (!isLoaded) {

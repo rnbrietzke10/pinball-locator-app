@@ -1,18 +1,33 @@
-import React, { useState } from 'react';
-import './App.css';
-import GetLocationBtn from './components/GetLocationBtn';
-import Map from './components/Map';
-import SearchForm from './components/SearchForm';
-
-// Photo by <a href="https://unsplash.com/@kylejeffreys?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kyle Johnson</a> on <a href="https://unsplash.com/photos/7dy20Hc1wWE?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import 'src/App.css';
+import GetLocationBtn from 'src/components/GetLocationBtn/GetLocationBtn';
+import Map from 'src/components/Map/Map';
+import SearchForm from 'src/components/SearchForm/SearchForm';
 
 function App() {
+  // const BASE_URL = 'https://pinballmap.com/api/v1';
   const [location, setLocation] = useState({ lat: 48.8584, lng: 2.2945 });
+  const [pinballData, setPinBallData] = useState([]);
 
   const getLocation = locationObj => {
-    // Use locationObj, {lat, long}
+    // Use locationObj, {lat, lng}
     setLocation(locationObj);
   };
+  useEffect(() => {
+    async function getPinballData() {
+      const res = await axios.get(`/regions/closest_by_lat_lon.json`, {
+        params: { lat: location.lat, lon: location.lng },
+      });
+      const regionLocationsData = await axios.get(
+        `/region/${res.data.region.name}/locations.json`
+      );
+      console.log(regionLocationsData.data);
+      // setPinBallData();
+    }
+    getPinballData();
+  }, [location]);
+
   return (
     <div className='App-container'>
       <header className='App-header'>
