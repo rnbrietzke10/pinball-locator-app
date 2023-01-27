@@ -6,8 +6,9 @@ import './Map.css';
 const Map = ({ location }) => {
   const [map, setMap] = useState(null);
   // Loads sciprt from the cdn
+
   const { isLoaded } = useJsApiLoader({
-    // googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
   if (!isLoaded) {
@@ -15,9 +16,9 @@ const Map = ({ location }) => {
     return <h2>Loading...</h2>;
   }
   return (
-    <main id="Map-container">
+    <main id='Map-container'>
       <GoogleMap
-        id="GoogleMap"
+        id='GoogleMap'
         center={location}
         zoom={15}
         mapContainerStyle={{ width: '80%', height: '80%' }}
@@ -27,7 +28,7 @@ const Map = ({ location }) => {
           mapTypeControl: false,
           fullscreenControl: false,
         }}
-        onLoad={(map) => setMap(map)}
+        onLoad={map => setMap(map)}
       ></GoogleMap>
     </main>
   );

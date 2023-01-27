@@ -2,13 +2,32 @@
   text-align: center;
   width: 100%;
   height: 100vh;
-  background-color: #dcd6f7;
-  color: #424874;
+
+  background-image: url('./assets/kyle-johnson-7dy20Hc1wWE-unsplash.jpg');
+  background-size: cover;
+  color: #fff;
+}
+.container {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
-/* Form color #CACFD6 */
-
-/* Optional color scheme Bittersweet: #FE7773
-Cosmos: #FFD8D8
-Nile Blue: #194049
-Seagull: #87CEEB */
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.btn {
+  margin-top: 33px;
+  background-color: #f0f2f5;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  border: none;
+  color: #000;
+  margin-bottom: 10px;
+  padding: 10px;
+  cursor: pointer;
+}

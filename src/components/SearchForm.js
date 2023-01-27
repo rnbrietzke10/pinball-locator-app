@@ -1,58 +1,51 @@
 import React, { useState } from 'react';
+import './SearchForm.css';
 
 const SearchForm = ({ getLocation }) => {
-  const INITIAL_STATE = { lat: '', long: '' };
+  const INITIAL_STATE = { lat: '', lng: '' };
   const [formData, setFormData] = useState(INITIAL_STATE);
+
   // Getvalues from inputs
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    console.log(formData);
     getLocation(formData);
     setFormData(INITIAL_STATE);
   };
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
-    setFormData((data) => ({ ...data, [name]: value }));
+    setFormData(data => ({ ...data, [name]: parseFloat(value) }));
   };
-  const geUserLocation = () => {
-    // Use Google API to ge users longitude and latitude.
-    // Set value of inputs to above long and lat.
 
-    getLocation();
-  };
   return (
-    <div className="SearchForm-container">
+    <div className='SearchForm-container'>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="lat">Enter Latitude</label>
+        <div className='form-input-container'>
+          <label htmlFor='lat'>Enter Latitude</label>
           <input
-            id="lat"
-            type="text"
-            name="lat"
+            id='lat'
+            type='text'
+            name='lat'
             value={formData.lat}
-            placeholder="Enter Latitude"
-            className="form-input"
+            placeholder='Enter Latitude'
+            className='form-input'
             onChange={handleChange}
           />
         </div>
-        <div>
-          <label htmlFor="long">Enter Longitude</label>
+        <div className='form-input-container'>
+          <label htmlFor='lng'>Enter Longitude</label>
           <input
-            id="long"
-            type="text"
-            name="long"
-            value={formData.long}
-            placeholder="Enter Longitude"
-            className="form-input"
+            id='lng'
+            type='text'
+            name='lng'
+            value={formData.lng}
+            placeholder='Enter Longitude'
+            className='form-input'
             onChange={handleChange}
           />
         </div>
 
-        <button>Search</button>
+        <button className='btn'>Search</button>
       </form>
-      <div>
-        <button onClick={geUserLocation}>Use My Location</button>
-      </div>
     </div>
   );
 };
